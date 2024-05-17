@@ -20,9 +20,7 @@ J'ai décidé d'utiliser Docker afin de containeriser mon projet. L'installation
 Il faut d'abord télécharger Docker Desktop sur internet. Le lien ci-dessous téléchargera directement docker desktop sur votre pc.
 (https://desktop.docker.com/win/main/amd64/Docker%20Desktop%20Installer.exe)
 
-Installez le.
-
-Une fois terminé, il faut ensuite cloner le dépôt Git.
+Une fois installé, il faut ensuite cloner le dépôt Git.
 
 Copiez ````git clone https://github.com/EniotnaGK/AI_Project.git````
 
