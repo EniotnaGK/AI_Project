@@ -24,7 +24,6 @@ Installez le.
 
 Une fois terminé, l'environnement est prêt à être utilisé.
 
-
 Il faut ensuite cloner le dépôt Git.
 
 Copiez ````git clone https://github.com/EniotnaGK/AI_Project.git````
