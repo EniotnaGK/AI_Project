@@ -26,13 +26,12 @@ Une fois terminé, l'environnement est prêt à être utilisé.
 
 
 Il faut ensuite cloner le dépôt Git.
-Rendez-vous sur (https://github.com/EniotnaGK/AI_Project)
 
+Copiez ````git clone https://github.com/EniotnaGK/AI_Project.git````
 
-Ouvrez donc un terminal de commande en tapant ````windows + r````, tapez ````cmd```` et faites ````entrer````.
+Ouvrez ensuite un terminal de commande en tapant ````windows + r````, tapez ````cmd```` et faites ````entrer````.
 
-
-Ensuite placez
+Ensuite placez-vous dans le répertoire où vous voulez pour installer votre projet en utilisant ````cd to/your/path````
 
 
 
