@@ -24,7 +24,14 @@ Installez le.
 
 Une fois terminé, l'environnement est prêt à être utilisé.
 
+
 Il faut ensuite cloner le dépôt Git.
+
+
+Ouvrez donc un terminal de commande en tapant ````windows + r````, tapez ````cmd```` et faites ````entrer````.
+
+
+Ensuite placez
 
 
 
