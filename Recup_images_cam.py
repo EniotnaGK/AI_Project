@@ -1,16 +1,15 @@
-import cv2
 import requests
 import numpy as np
 from io import BytesIO
 from PIL import Image
 import os
 import time
-import pickle
-
+import datetime
+import imagehash
 
 def telecharger_image(url="https://download.data.grandlyon.com/files/rdata/pvo_patrimoine_voirie.pvocameracriter/CWL9018.JPG"):
     # Télécharger l'image à partir de l'URL
-    response = requests.get("https://download.data.grandlyon.com/files/rdata/pvo_patrimoine_voirie.pvocameracriter/CWL9018.JPG")
+    response = requests.get(url)
     
     # Vérifier si la requête a réussi
     if response.status_code == 200:
@@ -21,20 +20,26 @@ def telecharger_image(url="https://download.data.grandlyon.com/files/rdata/pvo_p
         print("Erreur lors de la requête pour télécharger l'image.")
         return None
 
-def comparer_images(image1, image2):
-    # Convertir les images en tableaux numpy
-    np_image1 = np.array(image1)
-    np_image2 = np.array(image2)
+def comparer_images_par_hash(image1, image2):
+    if image1 is None or image2 is None:
+        return True
+    # Calculer le hachage d'image pour chaque image
+    hash_image1 = imagehash.average_hash(image1)
+    hash_image2 = imagehash.average_hash(image2)
 
-    # Comparer les tableaux numpy pour détecter les différences de pixels
-    return not np.array_equal(np_image1, np_image2)
+    return hash_image1 - hash_image2 > 2
 
-def enregistrer_image(image, chemin_enregistrement, liste_images):
-    # Enregistrer l'image sur le disque
-    image.save(chemin_enregistrement)
-    print("Nouvelle image enregistrée.")
-    # Ajouter l'image à la liste
-    liste_images.append(image)
+def enregistrer_image(image, chemin_enregistrement):
+    # Obtenir la date et l'heure actuelles
+    filename = f'{datetime.datetime.now().strftime("%Y%m%d%H%M%S")}.jpg' 
+    
+    # Concaténer le nom du fichier avec la date et l'heure actuelles et l'extension
+    chemin_enregistrement_date = os.path.join(chemin_enregistrement, filename)
+    
+    # Enregistrer l'image sur le disque avec le nom incluant la date et l'heure actuelles
+    image.save(chemin_enregistrement_date)
+    print("Nouvelle image enregistrée avec la date et l'heure d'aujourd'hui.")
+    return filename
 
 # URL de l'image à surveiller
 url_image = "https://download.data.grandlyon.com/files/rdata/pvo_patrimoine_voirie.pvocameracriter/CWL9018.JPG"
@@ -45,12 +50,8 @@ if not os.path.exists(dossier_enregistrement):
     os.makedirs(dossier_enregistrement)
 
 # Vérifier si une liste d'images existe déjà
-chemin_liste_images = os.path.join(dossier_enregistrement, "liste_images.pkl")
-if os.path.exists(chemin_liste_images):
-    with open(chemin_liste_images, "rb") as fichier:
-        liste_images = pickle.load(fichier)
-else:
-    liste_images = []
+liste_images = os.listdir(dossier_enregistrement)
+
 
 while True:
     # Télécharger la nouvelle image
@@ -58,19 +59,17 @@ while True:
     
     # Charger la dernière image de la liste
     if liste_images:
-        image_precedente = liste_images[-1]
+        image_precedente = Image.open(os.path.join(dossier_enregistrement, liste_images[-1]))
     else:
         image_precedente = None
     
     # Comparer les images et enregistrer la nouvelle image si elles sont différentes
-    if comparer_images(image_precedente, nouvelle_image):
-        chemin_enregistrement = os.path.join(dossier_enregistrement, f"image_{len(liste_images)}.jpg")
-        enregistrer_image(nouvelle_image, chemin_enregistrement, liste_images)
+    if comparer_images_par_hash(image_precedente, nouvelle_image):
+        filename = enregistrer_image(nouvelle_image, dossier_enregistrement)
         # Sauvegarder la liste d'images
-        with open(chemin_liste_images, "wb") as fichier:
-            pickle.dump(liste_images, fichier)
+        liste_images.append(filename)
     else:
         print("Aucun changement de pixels détecté.")
     
-    # Pause de 5 secondes avant la prochaine requête
+    # Pause de 20 secondes avant la prochaine requête
     time.sleep(20)
