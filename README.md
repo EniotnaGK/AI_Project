@@ -26,6 +26,7 @@ Une fois terminé, l'environnement est prêt à être utilisé.
 
 
 Il faut ensuite cloner le dépôt Git.
+Rendez-vous sur (https://github.com/EniotnaGK/AI_Project)
 
 
 Ouvrez donc un terminal de commande en tapant ````windows + r````, tapez ````cmd```` et faites ````entrer````.
