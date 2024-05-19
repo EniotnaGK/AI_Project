@@ -243,6 +243,9 @@ recup_yolo_images()
 ```
 
 
-
+## Requirements.txt
+``` txt
+requests==2.27.1
+```
 
 
