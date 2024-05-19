@@ -59,7 +59,7 @@ CMD ["python", "Recup_images_cam.py"]
 
 ## Recup_images_cam.py
 
-#### Les imports des packages python :
+### Les imports des packages python :
 ``` python
 import requests
 import numpy as np
@@ -71,7 +71,7 @@ import datetime
 import imagehash
 ```
 
-#### La fonction pour télécharger l'image depuis l'URL de la caméra
+### La fonction pour télécharger l'image depuis l'URL de la caméra
 ``` python
 def telecharger_image(url="https://download.data.grandlyon.com/files/rdata/pvo_patrimoine_voirie.pvocameracriter/CWL9018.JPG"):
     # Télécharger l'image à partir de l'URL
@@ -87,7 +87,7 @@ def telecharger_image(url="https://download.data.grandlyon.com/files/rdata/pvo_p
         return None
 ```
 
-#### La fonction pour comparer les images par hash
+### La fonction pour comparer les images par hash
 ``` python
 def comparer_images_par_hash(image1, image2):
     if image1 is None or image2 is None:
@@ -99,7 +99,7 @@ def comparer_images_par_hash(image1, image2):
     return hash_image1 - hash_image2 > 2
 ```
 
-#### La fonction pour enregistrer l'image
+### La fonction pour enregistrer l'image
 ``` python
 def enregistrer_image(image, chemin_enregistrement):
     # Obtenir la date et l'heure actuelles
@@ -114,7 +114,7 @@ def enregistrer_image(image, chemin_enregistrement):
     return filename
 ```
 
-#### La dernière partie du code est là où l'on va par exemple renseigner l'URL où l'on va télécharger la nouvelle image ainsi que là où l'on va créer le répertoire où enregistrer les images s'il n'est pas déjà crée, appeler la fonction pour comparer les images ou encore régler le temps entre chaque requête.
+### La dernière partie du code est là où l'on va par exemple renseigner l'URL où l'on va télécharger la nouvelle image ainsi que là où l'on va créer le répertoire où enregistrer les images s'il n'est pas déjà crée, appeler la fonction pour comparer les images ou encore régler le temps entre chaque requête.
 ``` python
 # URL de l'image à surveiller
 url_image = "https://download.data.grandlyon.com/files/rdata/pvo_patrimoine_voirie.pvocameracriter/CWL9018.JPG"
@@ -184,7 +184,7 @@ CMD ["python", "Images_label_dl.py"]
 
 ## Images_label_dl.py :
 
-#### Les imports des packages python :
+### Les imports des packages python :
 ```python
 import os
 import time
@@ -192,7 +192,7 @@ import requests
 ```
 
 
-#### La fonction pour télécharger les images exportées depuis Label Studio
+### La fonction pour télécharger les images exportées depuis Label Studio
 ```python
 # Fonction pour télécharger les images en fonction des fichiers d'annotations YOLO
 def recup_yolo_images():
