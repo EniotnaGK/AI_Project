@@ -30,9 +30,11 @@ Ensuite placez-vous à la racine de votre projet en utilisant ````cd to/your/pat
 
 Une fois le dépôt installé dans votre répertoire, tapez ````code .```` pour lancer visual studio, si vous ne l'avez pas voici un lien pour le télécharger : https://code.visualstudio.com/download .
 
+
 ## Utilisation
 
 ### Récupération d'images depuis la caméra
+
 
 Ouvrez un terminal dans visual studio et faites ````cd Recup_images ````.
 
@@ -42,10 +44,12 @@ Il faut ensuite lancer le container en faisant ````docker run recup_images_cam``
 
 ### Exportation des fichiers au format Yolo :
 
+
 Il faut se rendre sur Label studio et aller sur le projet et puis exporter les données en format yolo.
 Vous le placerez ensuite à la racine de votre projet et pourrez le renommer si besoin (en Yolo par exemple).
 
 ### Récupération des images labellisées 
+
 
 Il faut maintenant changer de répertoire et se mettre dans celui de la récupération d'images labellisées plutôt que celui de la récup des images de la cam.
 
