@@ -34,7 +34,9 @@ Une fois le dépôt installé dans votre répertoire, tapez ````code .```` pour 
 
 ### Récupération d'images depuis la caméra
 
-Ouvrez un terminal dans visual studio et entrez ````docker build -t recup_images_cam .````. Cela va créer notre image Docker afin de récupérer les images de la caméra et va en même temps installer les dépendances du fichier "requirements.txt"
+Ouvrez un terminal dans visual studio et faites ````cd Recup_images ````.
+
+Ensuite entrez ````docker build -t recup_images_cam .````. Cela va créer notre image Docker afin de récupérer les images de la caméra et va en même temps installer les dépendances du fichier "requirements.txt" pour éxécuter ce code.
 
 Il faut ensuite lancer le container en faisant ````docker run recup_images_cam```` ce qui va lancer le ````recup_images_cam.py```` et cela va donc récupérer les photos de la caméra, les requêtes sont envoyées toutes les 20 secondes.
 
@@ -44,6 +46,12 @@ Il faut se rendre sur Label studio et aller sur le projet et puis exporter les d
 Vous le placerez ensuite à la racine de votre projet et pourrez le renommer si besoin (en Yolo par exemple).
 
 ### Récupération des images labellisées 
+
+Il faut maintenant changer de répertoire et se mettre dans celui de la récupération d'images labellisées plutôt que celui de la récup des images de la cam.
+
+Faites donc d'abord ````cd ..```` puis ````cd Recup_images_labellisées````.
+
+Nous allons créer la 2e image avec ````docker build -t images_label_dl .```` et puis lancer le container avec ````docker run images_label_dl````
 
 
 
