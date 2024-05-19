@@ -5,15 +5,15 @@ Grâce à des caméras installées dans le GrandLyon, nous avons visuellement ac
 ## Dépôt Git :
 
 - Un dossier ````Recup_images```` qui contient :
-  - L'image Dockerfile
-  - Le script python pour récupérer le flux de la caméra et enregistrer les images
-  - Le fichier .txt pour installer les dépendances
+  - L'image ````Dockerfile````
+  - Le script ````Recup_images_cam.py```` pour récupérer le flux de la caméra et enregistrer les images
+  - Le fichier ````requirements.txt```` pour installer les dépendances
  
 - Un dossier ````Recup_images_labellisées```` qui contient :
-  - L'image Dockerfile
-  - Le script python pour télécharger les fichiers Yolo exportés du site ````Label Studio````
-  - Le fichier .txt pour installer les dépedances
+  - L'image ````Dockerfile````
+  - Le script ````Images_label_dl.py```` pour télécharger les fichiers Yolo exportés du site ````Label Studio````
+  - Le fichier ````requirements.txt```` pour installer les dépedances
  
-- Un README.md pour expliquer comment installer le projet
+- Un ````README.md```` pour expliquer comment installer le projet
 
-- Un CONTRIBUTING.md pour expliquer comment reprendre le projet ainsi que les aspects techniques.
+- Un ````CONTRIBUTING.md```` pour expliquer comment reprendre le projet ainsi que les aspects techniques.
