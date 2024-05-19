@@ -26,7 +26,7 @@ Copiez ````git clone https://github.com/EniotnaGK/AI_Project.git````
 
 Ouvrez ensuite un terminal de commande en tapant ````windows + r````, tapez ````cmd```` et faites ````Entrer````.
 
-Ensuite placez-vous dans le répertoire où vous voulez pour installer votre projet en utilisant ````cd to/your/path````. Collez ````git clone https://github.com/EniotnaGK/AI_Project.git```` et faites ````Entrer````.
+Ensuite placez-vous à la racine de votre projet en utilisant ````cd to/your/path````. Collez ````git clone https://github.com/EniotnaGK/AI_Project.git```` et faites ````Entrer````.
 
 Une fois le dépôt installé dans votre répertoire, tapez ````code .```` pour lancer visual studio, si vous ne l'avez pas voici un lien pour le télécharger : https://code.visualstudio.com/download
 
