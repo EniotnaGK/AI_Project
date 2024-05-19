@@ -6,12 +6,18 @@ Grâce à des caméras installées dans le GrandLyon, nous avons visuellement ac
 
 - Un dossier ````Recup_images```` qui contient :
   - L'image ````Dockerfile````
+    
   - Le script ````Recup_images_cam.py```` pour récupérer le flux de la caméra et enregistrer les images
+    
   - Le fichier ````requirements.txt```` pour installer les dépendances
+    
  
 - Un dossier ````Recup_images_labellisées```` qui contient :
+  
   - L'image ````Dockerfile````
+    
   - Le script ````Images_label_dl.py```` pour télécharger les fichiers Yolo exportés du site ````Label Studio````
+    
   - Le fichier ````requirements.txt```` pour installer les dépedances
  
 - Un ````README.md```` pour expliquer comment installer le projet
