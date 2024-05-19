@@ -1,4 +1,4 @@
-import requests
+import request
 import numpy as np
 from io import BytesIO
 from PIL import Image
