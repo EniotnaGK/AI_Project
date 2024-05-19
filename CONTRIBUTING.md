@@ -35,7 +35,7 @@ Vous pouvez accéder à notre projet via [ le site ](https://app.heartex.com/pro
 
 # Détails code
 
-Nous allons commencer par le dossier ````Recup_images```` :
+#### Nous allons commencer par le dossier ````Recup_images```` :
 
 ## Le Dockerfile :
 
@@ -162,7 +162,7 @@ imagehash==4.3.1
 ```
 
 
-Nous allons continuer avec le 2e dossier ````Recup_images_labellisées```` :
+#### Nous allons continuer avec le 2e dossier ````Recup_images_labellisées```` :
 
 ## Le Dockerfile :
 ``` Dockerfile
