@@ -1,5 +1,5 @@
 # Utilise l'image de base Python 3.9
-FROM python:3.9
+FROM python:3.
 
 # Définit le répertoire de travail dans le conteneur
 WORKDIR /app/Recup_images_labellisées
