@@ -38,7 +38,7 @@ Ouvrez un terminal dans visual studio et entrez ````docker build -t recup_images
 
 Il faut ensuite lancer le container en faisant ````docker run recup_images_cam```` ce qui va lancer le ````recup_images_cam.py```` et cela va donc récupérer les photos de la caméra, les requêtes sont envoyées toutes les 20 secondes.
 
-### Exportation de notre Yolo :
+### Exportation des fichiers au format Yolo :
 
 Il faut se rendre sur Label studio et aller sur le projet et puis exporter les données en format yolo.
 Vous le placerez ensuite à la racine de votre projet et pourrez le renommer si besoin (en Yolo par exemple).
