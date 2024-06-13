@@ -5,10 +5,10 @@ import requests
 # Fonction pour télécharger les images en fonction des fichiers d'annotations YOLO
 def recup_yolo_images():
     # Répertoire contenant le fichier d'annotations
-    labels_directory = os.path.abspath("labels")
+    labels_directory = os.path.abspath("yolo/labels")
 
     # Répertoire où enregistrer les images       
-    images_directory = "Images"
+    images_directory = "yolo/images"
 
     # URL de base pour télécharger les images
     base_url = "https://app.heartex.com/storage-data/uploaded/?filepath=upload/67163/"
