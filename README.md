@@ -49,7 +49,7 @@ Pour connaître le "container id" vous pouvez taper la commande ````docker ps -a
 ### Exportation des fichiers au format Yolo :
 
 
-Il faut se rendre sur Label studio [depuis ce lien](https://app.heartex.com/projects/67163/data?tab=88181) et puis exporter les données en format yolo.
+Il faut se rendre sur Label studio [depuis ce lien](https://app.heartex.com/projects/67163/data?tab=88181), cliquer sur "Exporter" et puis choisir de télécharger le snapshot le plus récent et choisir le format yolo.
 
 Une fois téléchargé, vous déziperez le dossier et le renommerez "yolo".
 
@@ -61,22 +61,12 @@ Vous le placerez dans votre dossier "Récup_images_labellisées".
 
 Il faut maintenant changer de répertoire et se mettre dans celui de la récupération d'images labellisées plutôt que celui de la récup des images de la cam.
 
-Faites donc d'abord ````cd ..```` puis ````cd Recup_images_labellisées````.
+Allez dans votre terminal et faites donc d'abord ````cd ..```` puis ````cd Recup_images_labellisées````.
 
 Nous allons créer la 2e image avec ````docker build -t images_label_dl .```` et puis lancer le container avec ````docker run -it images_label_dl````.
 
 Il téléchargera les images labellisées en format JPEG sur votre docker.
 
-Comme pour la 1ère fois, afin d'enregistrer les images sur ordinateur il vous faudra taper la commande ````docker cp <container_id>:/app/Recup_images_labellisées/Images /chemin/sur/votre/systeme_hote```` et puis la commande ````docker ps -a```` afin de connaître l'id du conteneur.
+Comme pour la 1ère fois, afin d'enregistrer les images sur votre ordinateur il vous faudra taper la commande ````docker cp <container_id>:/app/Recup_images_labellisées/yolo/images /chemin/sur/votre/systeme_hote```` et puis la commande ````docker ps -a```` afin de connaître l'id du conteneur.
 
-
-
-
-
-
-
-
-
-
-
-
+Après cela, les images contenues dans votre docker seront copiées puis collées dans le répertoire de votre choix.
