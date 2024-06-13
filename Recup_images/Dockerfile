@@ -10,5 +10,8 @@ COPY . /app/Recup_images/
 # Installe les dépendances Python spécifiées dans le fichier requirements.txt
 RUN pip install --no-cache-dir -r requirements.txt
 
+# Définir le volume pour stocker les images
+VOLUME /app/Recup_images/Images_Lyon
+
 # Exécute le script Python lorsque le conteneur démarre
 CMD ["python", "Recup_images_cam.py"]
