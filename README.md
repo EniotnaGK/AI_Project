@@ -59,7 +59,7 @@ Il faut maintenant changer de répertoire et se mettre dans celui de la récupé
 
 Faites donc d'abord ````cd ..```` puis ````cd Recup_images_labellisées````.
 
-Nous allons créer la 2e image avec ````docker build -t images_label_dl .```` et puis lancer le container avec ````docker run images_label_dl````
+Nous allons créer la 2e image avec ````docker build -t images_label_dl .```` et puis lancer le container avec ````docker run -it images_label_dl````
 
 Il va télécharger les images labellisées en format JPEG.
 
