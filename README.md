@@ -49,8 +49,12 @@ Pour connaître le "container id" vous pouvez taper la commande ````docker ps -a
 ### Exportation des fichiers au format Yolo :
 
 
-Il faut se rendre sur Label studio et aller sur le projet et puis exporter les données en format yolo.
-Vous le placerez ensuite à la racine de votre projet et pourrez le renommer si besoin (en Yolo par exemple).
+Il faut se rendre sur Label studio [depuis ce lien](https://app.heartex.com/projects/67163/data?tab=88181) et puis exporter les données en format yolo.
+
+Une fois téléchargé, vous déziperez le dossier et le renommerez "yolo".
+
+Vous le placerez dans votre dossier "Récup_images_labellisées".
+
 
 ### Récupération des images labellisées 
 
