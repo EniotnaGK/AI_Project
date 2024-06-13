@@ -42,7 +42,7 @@ Ensuite entrez ````docker build -t recup_images_cam .````. Cela va créer notre 
 
 Il faut ensuite lancer le container en faisant ````docker run -it recup_images_cam```` ce qui va lancer le ````recup_images_cam.py```` et cela va donc récupérer les photos de la caméra sur votre docker, les requêtes sont envoyées toutes les 20 secondes.
 
-Une fois les photos prisent, il vous faudra taper la commande ````docker cp <container_id>:/app/Recup_images/Images_Lyon /chemin/sur/votre/systeme_hote```` dans votre terminal. Cette commande vous permettra de copier les images que vous avez enregistrés sur votre docker et de les coller dans le répertoire que vous souhaitez.
+Une fois les photos prisent, il vous faudra taper la commande ````docker cp container_id:/app/Recup_images/Images_Lyon /chemin/sur/votre/systeme_hote```` dans votre terminal. Cette commande vous permettra de copier les images que vous avez enregistrés sur votre docker et de les coller dans le répertoire que vous souhaitez.
 
 Pour connaître le "container id" vous pouvez taper la commande ````docker ps -a```` dans votre terminal qui va vous afficher vos différents conteneur avec leurs id.
 
@@ -67,6 +67,6 @@ Nous allons créer la 2e image avec ````docker build -t images_label_dl .```` et
 
 Il téléchargera les images labellisées en format JPEG sur votre docker.
 
-Comme pour la 1ère fois, afin d'enregistrer les images sur votre ordinateur il vous faudra taper la commande ````docker cp <container_id>:/app/Recup_images_labellisées/yolo/images /chemin/sur/votre/systeme_hote```` et puis la commande ````docker ps -a```` afin de connaître l'id du conteneur.
+Comme pour la 1ère fois, afin d'enregistrer les images sur votre ordinateur il vous faudra taper la commande ````docker cp container_id:/app/Recup_images_labellisées/yolo/images /chemin/sur/votre/systeme_hote```` et puis la commande ````docker ps -a```` afin de connaître l'id du conteneur.
 
 Après cela, les images contenues dans votre docker seront copiées puis collées dans le répertoire de votre choix.
