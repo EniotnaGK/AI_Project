@@ -44,7 +44,7 @@ Il faut ensuite lancer le container en faisant ````docker run -it recup_images_c
 
 Une fois les photos prisent, il vous faudra taper la commande ````docker cp <container_id>:/app/Recup_images/Images_Lyon /chemin/sur/votre/systeme_hote```` dans votre terminal. Cette commande vous permettra de copier les images que vous avez enregistrés sur votre docker et de les coller dans le répertoire que vous souhaitez.
 
-Pour connaître le "container id" vous pouvez taper la commande ````docker ps -a```` dans votre terminal qui va vous afficher vos différents conteneur avec leurs id
+Pour connaître le "container id" vous pouvez taper la commande ````docker ps -a```` dans votre terminal qui va vous afficher vos différents conteneur avec leurs id.
 
 ### Exportation des fichiers au format Yolo :
 
@@ -59,9 +59,11 @@ Il faut maintenant changer de répertoire et se mettre dans celui de la récupé
 
 Faites donc d'abord ````cd ..```` puis ````cd Recup_images_labellisées````.
 
-Nous allons créer la 2e image avec ````docker build -t images_label_dl .```` et puis lancer le container avec ````docker run -it images_label_dl````
+Nous allons créer la 2e image avec ````docker build -t images_label_dl .```` et puis lancer le container avec ````docker run -it images_label_dl````.
 
-Il va télécharger les images labellisées en format JPEG.
+Il téléchargera les images labellisées en format JPEG sur votre docker.
+
+Comme pour la 1ère fois, afin d'enregistrer les images sur ordinateur il vous faudra taper la commande ````docker cp <container_id>:/app/Recup_images_labellisées/Images /chemin/sur/votre/systeme_hote```` et puis la commande ````docker ps -a```` afin de connaître l'id du conteneur.
 
 
 
