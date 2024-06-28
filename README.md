@@ -15,6 +15,8 @@ Grâce à un script python je récupère les images de la caméra. Chaque image 
 J'ai décidé d'utiliser Docker afin de containeriser mon projet. L'installation de Docker sera la prochaine étape.
 
 
+#Partie Développement
+
 ## Installation
 
 Il faut d'abord télécharger Docker Desktop sur internet. Le lien ci-dessous téléchargera directement docker desktop sur votre pc.
@@ -66,3 +68,24 @@ Il téléchargera les images labellisées en format JPEG sur votre docker.
 Comme pour la 1ère fois, afin d'enregistrer les images sur votre ordinateur il vous faudra taper la commande ````docker cp container_id:/app/Recup_images_labellisées/yolo/images /chemin/sur/votre/systeme_hote```` et puis la commande ````docker ps -a```` afin de connaître l'id du conteneur.
 
 Après cela, les images contenues dans votre docker seront copiées puis collées dans le répertoire de votre choix.
+
+
+# Partie Production
+
+
+## Récupération d'images
+
+Comme effectué si dessus nous allons lancer notre script python pour récupérer les images depuis l'API. Ce script va tourner et actualiser toutes les 20 secondes en envoyant une nouvelle requête et va ensuite enregistrer les images en local au fur et à mesure.
+
+Nous avons ensuite le script python ````main.py```` qui lui va lire les images du dossier, effectuer un mask de prétraitement afin de cacher la partie au fond de l'image pour ne pas fausser nos résultats.
+
+Il va ensuite charger le modèle préentrainé choisi (Yolov8m dans notre cas) ainsi que les poids de notre entrainement. Il va faire une prédiction de nos images, il va estimer nos différents objets grâce à des bounding box et va nous afficher le pourcentage de prédiction.
+
+Il va ensuite enregistrer les images en local ainsi que sur un csv qui nous servira à alimenter notre dashboard.
+
+
+## Dashboard Analysis
+
+A l'aide de la librairie Dash nous allons créer des graphiques pour afficher nos données.
+
+Nous pouvons espérer générer un Dashboard qui va nous montrer le nombre de piétons sur une journée ou une semaine et voir les tendances.
