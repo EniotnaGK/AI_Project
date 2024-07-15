@@ -1,152 +1,137 @@
-from dash import Dash, html, dcc, Input, Output, callback
+import streamlit as st
 import pandas as pd
-import plotly.express as px
-from datetime import datetime
+import altair as alt
 
+def intro():
+    st.write("# Welcome to Streamlit! 👋")
+    st.sidebar.success("Select a demo above.")
 
-external_stylesheets = ['https://codepen.io/chriddyp/pen/bWLwgP.css']
+    st.markdown(
+        """
+        Streamlit is an open-source app framework built specifically for
+        Machine Learning and Data Science projects.
 
-app = Dash(__name__, external_stylesheets=external_stylesheets)
+        **👈 Select a demo from the dropdown on the left** to see some examples
+        of what Streamlit can do!
 
-df = pd.read_csv('detected_classes.csv')
+        ### Want to learn more?
 
-# Définir la fonction de conversion de timestamp en date
-def convert_to_date(timestamp):
+        - Check out [streamlit.io](https://streamlit.io)
+        - Jump into our [documentation](https://docs.streamlit.io)
+        - Ask a question in our [community forums](https://discuss.streamlit.io)
+
+        ### See more complex demos
+
+        - Use a neural net to [analyze the Udacity Self-driving Car Image Dataset](https://github.com/streamlit/demo-self-driving)
+        - Explore a [New York City rideshare dataset](https://github.com/streamlit/demo-uber-nyc-pickups)
+    """
+    )
+
+def data_frame_demo():
+    from urllib.error import URLError
+
+    st.markdown(f"# {list(page_names_to_funcs.keys())[1]}")
+    st.write(
+        """
+        This demo shows how to use `st.write` to visualize Pandas DataFrames.
+"""
+    )
+
+    @st.cache_data
+    def get_data():
+        return pd.read_csv("detected_classes.csv")
+
     try:
-        date = datetime.strptime(timestamp.split('.')[0], '%Y%m%d%H%M%S')
-        return date
-    except ValueError:
-        return None
+        df = get_data()
 
-# Appliquer la fonction à la colonne 'id'
-df['id'] = df['id'].apply(convert_to_date)
+        # Search bar for image ID
+        id_search = st.text_input("Search for an ID")
 
-# Filtrer les lignes avec des valeurs de date/heure invalides (NaT)
-df = df.dropna(subset=['id'])
+        if id_search:
+            # Filter dataframe by ID
+            filtered_df = df[df['id'].astype(str).str.contains(id_search, case=False, na=False)]
+            
+            # Display images corresponding to filtered IDs
+            for image_id in filtered_df['id'].unique():
+                image_url = f"C:/Users/antoi/Documents/AI_Project/Recup_images_labellisées/yolo/predict_images/{image_id}"
+                st.image(image_url, caption=f"Image ID: {image_id}", use_column_width=True)
 
-# Ajouter une colonne pour le jour de la semaine
-df['day_of_week'] = df['id'].dt.day_name()
+            # Display filtered data
+            st.write("### Filtered Data", filtered_df)
+        else:
+            st.warning("Enter an ID to search for images.")
 
-# Afficher le DataFrame mis à jour pour vérifier la conversion
-print(df.head())
+        selected_classes = st.multiselect(
+            "Filter by class name",
+            options=df['class_name'].unique(),
+            default=df['class_name'].unique()
+        )
+        if selected_classes:
+            df = df[df['class_name'].isin(selected_classes)]
+        else:
+            st.error("Please select at least one class.")
 
-app.layout = html.Div([
-    html.Div([
+        st.write("### Data", df)
 
-        html.Div([
-            dcc.Dropdown(
-                options=[{'label': cls, 'value': cls} for cls in df['class_name'].unique()],
-                value=df['class_name'].unique()[0],  # Première classe par défaut
-                id='crossfilter-class-column',
-            ),
-            dcc.RadioItems(
-                options=[{'label': 'Linear', 'value': 'Linear'}, {'label': 'Log', 'value': 'Log'}],
-                value='Linear',
-                id='crossfilter-class-type',
-                labelStyle={'display': 'inline-block', 'marginTop': '5px'}
+        # Selectbox for choosing the chart type
+        chart_type = st.selectbox("Select Chart Type", ["Bar Chart", "Line Chart", "Scatter Plot"])
+
+        if chart_type == "Bar Chart":
+            # Bar Chart
+            bar_chart = (
+                alt.Chart(df)
+                .mark_bar()
+                .encode(
+                    x='class_name:N',
+                    y='count:Q',
+                    color='class_name:N',
+                    tooltip=['id', 'class_name', 'count']
+                )
             )
-        ],
-        style={'width': '49%', 'display': 'inline-block'}),
-    ], style={
-        'padding': '10px 5px'
-    }),
+            st.altair_chart(bar_chart, use_container_width=True)
 
-    html.Div([
-        dcc.Graph(
-            id='crossfilter-indicator-scatter',
-            hoverData={'points': [{'customdata': df['id'].iloc[0]}]}
+        elif chart_type == "Line Chart":
+            # Line Chart
+            line_chart = (
+                alt.Chart(df)
+                .mark_line()
+                .encode(
+                    x='id:Q',
+                    y='count:Q',
+                    color='class_name:N',
+                    tooltip=['id', 'class_name', 'count']
+                )
+            )
+            st.altair_chart(line_chart, use_container_width=True)
+
+        elif chart_type == "Scatter Plot":
+            # Scatter Plot
+            scatter_plot = (
+                alt.Chart(df)
+                .mark_circle(size=60)
+                .encode(
+                    x='id:Q',
+                    y='count:Q',
+                    color='class_name:N',
+                    tooltip=['id', 'class_name', 'count']
+                )
+            )
+            st.altair_chart(scatter_plot, use_container_width=True)
+
+    except URLError as e:
+        st.error(
+            """
+            **This demo requires internet access.**
+
+            Connection error: %s
+        """
+            % e.reason
         )
-    ], style={'width': '49%', 'display': 'inline-block', 'padding': '0 20'}),
 
-    html.Div([
-        dcc.Graph(id='class-time-series')
-    ], style={'display': 'inline-block', 'width': '49%'}),
+page_names_to_funcs = {
+    "—": intro,
+    "DataFrame Demo": data_frame_demo,
+}
 
-    html.Div(dcc.Slider(
-        min=df['id'].min().timestamp() * 1000,
-        max=df['id'].max().timestamp() * 1000,
-        step=None,
-        id='crossfilter-id-slider',
-        value=df['id'].max().timestamp() * 1000,
-        marks={int(date.timestamp() * 1000): {'label': date.strftime('%Y-%m-%d %H:%M:%S'), 'style': {'writingMode': 'vertical-rl'}} for date in df['id']}
-    ), style={'width': '49%', 'padding': '0px 20px 20px 20px'}),
-
-    html.Div([
-        html.H2('Jours de la semaine correspondant aux timestamps'),
-        dcc.Graph(
-            id='day-of-week-graph',
-            figure={
-                'data': [
-                    {'x': df['id'], 'y': df['day_of_week'], 'type': 'bar', 'name': 'Jour de la semaine'}
-                ],
-                'layout': {
-                    'title': 'Jours de la semaine correspondant aux timestamps',
-                    'xaxis': {'title': 'Timestamp converti en jour de la semaine'},
-                    'yaxis': {'title': 'Jour de la semaine'}
-                }
-            }
-        )
-    ], style={'width': '80%', 'margin': 'auto', 'marginTop': '50px'})
-
-])
-
-
-@callback(
-    Output('crossfilter-indicator-scatter', 'figure'),
-    [Input('crossfilter-class-column', 'value'),
-     Input('crossfilter-class-type', 'value'),
-     Input('crossfilter-id-slider', 'value')])
-def update_graph(class_column, class_type, id_timestamp):
-    id_date = datetime.fromtimestamp(id_timestamp / 1000)
-    dff = df[df['id'] == id_date]
-
-    fig = px.scatter(dff[dff['class_name'] == class_column],
-                     x='id',
-                     y='count',
-                     hover_name='class_name',
-                     labels={'id': 'Timestamp converti en jour de la semaine', 'count': 'Nombre de détections'})
-
-    fig.update_traces(customdata=dff[dff['class_name'] == class_column]['id'])
-
-    fig.update_xaxes(title='id', type='linear')
-    fig.update_yaxes(title=class_column, type='linear' if class_type == 'Linear' else 'log')
-
-    fig.update_layout(margin={'l': 40, 'b': 40, 't': 10, 'r': 0}, hovermode='closest')
-
-    return fig
-
-
-def create_time_series(dff, axis_type, title):
-
-    fig = px.scatter(dff, x='id', y='count')
-
-    fig.update_traces(mode='lines+markers')
-
-    fig.update_xaxes(showgrid=False)
-
-    fig.update_yaxes(type='linear' if axis_type == 'Linear' else 'log')
-
-    fig.add_annotation(x=0, y=0.85, xanchor='left', yanchor='bottom',
-                       xref='paper', yref='paper', showarrow=False, align='left',
-                       text=title)
-
-    fig.update_layout(height=225, margin={'l': 20, 'b': 30, 'r': 10, 't': 10})
-
-    return fig
-
-
-@callback(
-    Output('class-time-series', 'figure'),
-    [Input('crossfilter-indicator-scatter', 'hoverData'),
-     Input('crossfilter-class-column', 'value'),
-     Input('crossfilter-class-type', 'value')])
-def update_class_timeseries(hoverData, class_column, axis_type):
-    image_id = hoverData['points'][0]['customdata']
-    dff = df[df['id'] == image_id]
-    dff = dff[dff['class_name'] == class_column]
-    title = f'<b>{image_id}</b><br>{class_column}'
-    return create_time_series(dff, axis_type, title)
-
-
-if __name__ == '__main__':
-    app.run_server(debug=True)
+demo_name = st.sidebar.selectbox("Choose a demo", page_names_to_funcs.keys())
+page_names_to_funcs[demo_name]()
