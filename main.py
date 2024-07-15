@@ -1,7 +1,6 @@
 import os
 import cv2
 import glob
-import torch
 import pandas as pd
 from ultralytics import YOLO
 from pathlib import Path
@@ -45,14 +44,14 @@ def predict_and_draw_boxes(model, image, output_path):
     return class_counts
 
 def main():
-    folder_path = 'C:/Users/aerisay/Documents/AI_Project/Recup_images_labellisées/yolo/dataset_complet'
-    output_folder = 'C:/Users/aerisay/Documents/AI_Project/Recup_images_labellisées/yolo/predict_images'
+    folder_path = 'C:/Users/antoi/Documents/AI_Project/Recup_images/Images_Lyon'
+    output_folder = 'C:/Users/antoi/Documents/AI_Project/model/predict_images'
     mask_reference_path = 'mask.jpg'  # Chemin vers l'image de référence pour les masques
     # mask_output_folder = 'C:/Users/aerisay/Documents/AI_Project/Recup_images_labellisées/yolo/predict_images_mask'  # Dossier de sortie pour les masques
-    csv_output_path = 'C:/Users/aerisay/Documents/AI_Project/Recup_images_labellisées/yolo/detected_classes.csv'  # Chemin vers le fichier CSV de sortie
+    csv_output_path = 'C:/Users/antoi/Documents/AI_Project/Recup_images/detected_classes.csv'  # Chemin vers le fichier CSV de sortie
 
     model = YOLO('yolov8m.pt')
-    model = YOLO("C:/Users/aerisay/Documents/AI_Project/Recup_images_labellisées/yolo/val/runs/detect/train4/weights/best.pt")  # load a custom model
+    model = YOLO("best.pt")  # load a custom model
 
     # Charger l'image de référence avec OpenCV
     reference_image = cv2.imread(mask_reference_path, cv2.IMREAD_COLOR)
