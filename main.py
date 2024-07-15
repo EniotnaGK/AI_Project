@@ -45,8 +45,8 @@ def predict_and_draw_boxes(model, image, output_path):
     return class_counts
 
 def main():
-    folder_path = 'C:/Users/aerisay/Documents/AI_Project/Recup_images/Images_Lyon'
-    output_folder = 'C:/Users/aerisay/Documents/AI_Project/Recup_images/model/predict_images'
+    folder_path = 'C:/Users/aerisay/Documents/AI_Project/Recup_images_labellisées/yolo/dataset_complet'
+    output_folder = 'C:/Users/aerisay/Documents/AI_Project/Recup_images_labellisées/yolo/predict_images'
     mask_reference_path = 'mask.jpg'  # Chemin vers l'image de référence pour les masques
     # mask_output_folder = 'C:/Users/aerisay/Documents/AI_Project/Recup_images_labellisées/yolo/predict_images_mask'  # Dossier de sortie pour les masques
     csv_output_path = 'C:/Users/aerisay/Documents/AI_Project/Recup_images_labellisées/yolo/detected_classes.csv'  # Chemin vers le fichier CSV de sortie
