@@ -15,7 +15,7 @@ Grâce à un script python je récupère les images de la caméra. Chaque image 
 J'ai décidé d'utiliser Docker afin de containeriser mon projet. L'installation de Docker sera la prochaine étape.
 
 
-#Partie Développement
+# Partie Développement
 
 ## Installation
 
@@ -75,7 +75,9 @@ Après cela, les images contenues dans votre docker seront copiées puis collée
 
 ## Récupération d'images
 
-Comme effectué si dessus nous allons lancer notre script python pour récupérer les images depuis l'API. Ce script va tourner et actualiser toutes les 20 secondes en envoyant une nouvelle requête et va ensuite enregistrer les images en local au fur et à mesure.
+Comme effectué ci dessus nous allons lancer notre script python pour récupérer les images depuis l'API. Ce script va tourner et actualiser les requêtes toutes les 20 secondes et va ensuite enregistrer les images en local au fur et à mesure.
+
+Pour ce faire nous allons lancer la commande 
 
 Nous avons ensuite le script python ````main.py```` qui lui va lire les images du dossier, effectuer un mask de prétraitement afin de cacher la partie au fond de l'image pour ne pas fausser nos résultats.
 
