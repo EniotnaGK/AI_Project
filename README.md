@@ -40,7 +40,7 @@ Une fois le dépôt installé dans votre répertoire, tapez ````code .```` pour 
 
 Ouvrez un terminal dans visual studio et faites ````cd Recup_images ````.
 
-Ensuite entrez ```Dockerfile docker build -t recup_images_cam .```. Cela va créer notre image Docker afin de récupérer les images de la caméra et va en même temps installer les dépendances du fichier "requirements.txt" pour éxécuter ce code.
+Ensuite entrez ```docker build -t recup_images_cam .```. Cela va créer notre image Docker afin de récupérer les images de la caméra et va en même temps installer les dépendances du fichier "requirements.txt" pour éxécuter ce code.
 
 Il faut ensuite lancer le container en faisant ````docker run -v data:/app/Recup_images/Images_Lyon -it recup_images_cam```` ce qui va lancer le ````recup_images_cam.py```` et cela va donc récupérer les photos de la caméra sur votre docker et les enregistrer en local à l'emplacement que vous choisirez, les requêtes sont envoyées toutes les 20 secondes.
 
