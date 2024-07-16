@@ -40,7 +40,6 @@ def main():
     folder_path = 'C:/Users/antoi/Documents/AI_Project/Recup_images/Images_Lyon'
     output_folder = 'C:/Users/antoi/Documents/AI_Project/object_detector/predict_images'
     mask_reference_path = 'mask.jpg'  # Chemin vers l'image de référence pour les masques
-    # mask_output_folder = 'C:/Users/aerisay/Documents/AI_Project/Recup_images_labellisées/yolo/predict_images_mask'  # Dossier de sortie pour les masques
     csv_output_path = 'C:/Users/antoi/Documents/AI_Project/object_detector/detected_classes.csv'  # Chemin vers le fichier CSV de sortie
 
     model = YOLO('yolov8m.pt')
@@ -54,6 +53,7 @@ def main():
     os.makedirs(output_folder, exist_ok=True)
 
     processed_images = set()
+    previous_image = None
 
     while True:
         image_paths = glob.glob(os.path.join(folder_path, '*.jpg'))
@@ -82,6 +82,24 @@ def main():
                         })
 
                     processed_images.add(image_path)
+
+                    # Suppression de la précédente image après la détection d'une nouvelle image
+                    if previous_image is not None:
+                        try:
+                            os.remove(previous_image)
+                            print(f"Image d'entrée supprimée : {previous_image}")
+                        except Exception as e:
+                            print(f"Erreur lors de la suppression de l'image d'entrée {previous_image}: {e}")
+                        
+                        output_image_path = os.path.join(output_folder, os.path.basename(previous_image))
+                        try:
+                            os.remove(output_image_path)
+                            print(f"Image de sortie supprimée : {output_image_path}")
+                        except Exception as e:
+                            print(f"Erreur lors de la suppression de l'image de sortie {output_image_path}: {e}")
+
+                    # Mise à jour de l'image précédente
+                    previous_image = image_path
 
                 except ValueError as e:
                     print(f"Erreur pour l'image {image_path}: {e}")
