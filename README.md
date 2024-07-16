@@ -113,11 +113,28 @@ Il va ensuite charger le modèle préentrainé choisi (Yolov8m dans notre cas) a
 
 Il va ensuite enregistrer les images en local ainsi que sur un csv qui nous servira à alimenter notre dashboard.
 
+Pour ce faire nous devons créer et exécuter le dockerfile :
+
+```dockerfile
+docker build -t main -f Dockerfile_main .
+```
+
+```dockerfile
+docker run -v C:\Users\antoi\Documents\AI_Project\Docker:/app/detected_classes -it main
+```
 
 ## Dashboard Analysis
 
 A l'aide de la librairie streamlit nous allons créer des graphiques pour afficher nos données.
 
-Lancer la commande ````docker build -t dashboard -f Dockerfile_dashboard .```` puis ````docker run -it dashboard```` afin de créer et lancer le docker contenant notre dashboard.
+Lancer la commande :
+```dockerfile
+docker build -t dashboard -f Dockerfile_dashboard .
+```
+Puis :
+```dockerfile
+docker run -it dashboard
+```
+Afin de créer et lancer le docker contenant notre dashboard.
 
 Vous pouvez naviguer et tester les différents filtres et analyser les données des images.
