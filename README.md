@@ -120,7 +120,7 @@ docker build -t main -f Dockerfile_main .
 ```
 
 ```dockerfile
-docker run -v C:\Users\antoi\Documents\AI_Project\Docker:/app/detected_classes -it main
+docker run -v data:/app/detected_classes -it main
 ```
 
 ## Dashboard Analysis
