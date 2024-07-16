@@ -77,7 +77,9 @@ Après cela, les images contenues dans votre docker seront copiées puis collée
 
 Comme effectué ci dessus nous allons lancer notre script python pour récupérer les images depuis l'API. Ce script va tourner et actualiser les requêtes toutes les 20 secondes et va ensuite enregistrer les images en local au fur et à mesure.
 
-Pour ce faire nous allons lancer la commande 
+Pour ce faire nous allons lancer la commande ````docker build -t recup_images_cam .```` puis ````docker run -v data:/app/Recup_images/Images_Lyon -it recup_images_cam```` pour créer puis lancer le container.
+
+## Object Detector
 
 Nous avons ensuite le script python ````main.py```` qui lui va lire les images du dossier, effectuer un mask de prétraitement afin de cacher la partie au fond de l'image pour ne pas fausser nos résultats.
 
@@ -88,6 +90,8 @@ Il va ensuite enregistrer les images en local ainsi que sur un csv qui nous serv
 
 ## Dashboard Analysis
 
-A l'aide de la librairie Dash nous allons créer des graphiques pour afficher nos données.
+A l'aide de la librairie streamlit nous allons créer des graphiques pour afficher nos données.
 
-Nous pouvons espérer générer un Dashboard qui va nous montrer le nombre de piétons sur une journée ou une semaine et voir les tendances.
+Lancer la commande ````python -m streamlit run dashboard.py```` afin d'être redirigé sur la page du dashboard.
+
+Vous pouvez naviguer et tester les différents filtres et analyser les données des images.
