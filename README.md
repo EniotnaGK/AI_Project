@@ -92,6 +92,6 @@ Il va ensuite enregistrer les images en local ainsi que sur un csv qui nous serv
 
 A l'aide de la librairie streamlit nous allons créer des graphiques pour afficher nos données.
 
-Lancer la commande ````python -m streamlit run dashboard.py```` afin d'être redirigé sur la page du dashboard.
+Lancer la commande ````docker build -t dashboard -f Dockerfile_dashboard .```` puis ````docker run -it dashboard```` afin de créer et lancer le docker contenant notre dashboard.
 
 Vous pouvez naviguer et tester les différents filtres et analyser les données des images.
