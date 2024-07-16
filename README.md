@@ -40,9 +40,18 @@ Une fois le dépôt installé dans votre répertoire, tapez ````code .```` pour 
 
 Ouvrez un terminal dans visual studio et faites ````cd Recup_images ````.
 
-Ensuite entrez ```docker build -t recup_images_cam .```. Cela va créer notre image Docker afin de récupérer les images de la caméra et va en même temps installer les dépendances du fichier "requirements.txt" pour éxécuter ce code.
+Ensuite entrez: 
+```python
+docker build -t recup_images_cam .
+```
 
-Il faut ensuite lancer le container en faisant ````docker run -v data:/app/Recup_images/Images_Lyon -it recup_images_cam```` ce qui va lancer le ````recup_images_cam.py```` et cela va donc récupérer les photos de la caméra sur votre docker et les enregistrer en local à l'emplacement que vous choisirez, les requêtes sont envoyées toutes les 20 secondes.
+Cela va créer notre image Docker afin de récupérer les images de la caméra et va en même temps installer les dépendances du fichier "requirements.txt" pour éxécuter ce code.
+
+Il faut ensuite lancer le container en faisant :
+```dockerfile 
+docker run -v data:/app/Recup_images/Images_Lyon -it recup_images_cam
+```
+Ce qui va lancer le ````recup_images_cam.py```` et cela va donc récupérer les photos de la caméra sur votre docker et les enregistrer en local à l'emplacement que vous choisirez, les requêtes sont envoyées toutes les 20 secondes.
 
 ### Exportation des fichiers au format Yolo :
 
@@ -61,12 +70,21 @@ Il faut maintenant changer de répertoire et se mettre dans celui de la récupé
 
 Allez dans votre terminal et faites donc d'abord ````cd ..```` puis ````cd Recup_images_labellisées````.
 
-Nous allons créer la 2e image avec ````docker build -t images_label_dl .```` et puis lancer le container avec ````docker run -it images_label_dl````.
+Nous allons créer la 2e image avec : 
+```dockerfile
+docker build -t images_label_dl .
+```
+Et puis lancer le container avec : 
+```dockerfile 
+docker run -it images_label_dl
+```
 
 Il téléchargera les images labellisées en format JPEG sur votre docker.
 
-Comme pour la 1ère fois, afin d'enregistrer les images sur votre ordinateur il vous faudra taper la commande ````docker cp container_id:/app/Recup_images_labellisées/yolo/images /chemin/sur/votre/systeme_hote```` et puis la commande ````docker ps -a```` afin de connaître l'id du conteneur.
-
+Comme pour la 1ère fois, afin d'enregistrer les images sur votre ordinateur il vous faudra taper la commande :
+```dockerfile
+docker run data:/app/Recup_images_labellisées/yolo/images
+```
 Après cela, les images contenues dans votre docker seront copiées puis collées dans le répertoire de votre choix.
 
 
@@ -77,7 +95,15 @@ Après cela, les images contenues dans votre docker seront copiées puis collée
 
 Comme effectué ci dessus nous allons lancer notre script python pour récupérer les images depuis l'API. Ce script va tourner et actualiser les requêtes toutes les 20 secondes et va ensuite enregistrer les images en local au fur et à mesure.
 
-Pour ce faire nous allons lancer la commande ````docker build -t recup_images_cam .```` puis ````docker run -v data:/app/Recup_images/Images_Lyon -it recup_images_cam```` pour créer puis lancer le container.
+Pour ce faire nous allons lancer la commande :
+```dockerfile
+docker build -t recup_images_cam .
+``` 
+Puis :
+```dockerfile
+docker run -v data:/app/Recup_images/Images_Lyon -it recup_images_cam
+```
+Pour créer puis lancer le container respectivement.
 
 ## Object Detector
 
