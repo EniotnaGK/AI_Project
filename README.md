@@ -97,11 +97,11 @@ Comme effectué ci dessus nous allons lancer notre script python pour récupére
 
 Pour ce faire nous allons lancer la commande :
 ```dockerfile
-docker build -t recup_images_cam .
+docker build --no-cache -t recup_images_cam ./Recup_images
 ``` 
 Puis :
 ```dockerfile
-docker run -v data:/app/Recup_images/Images_Lyon -it recup_images_cam
+docker run --rm -v .\Images_Lyon:/app/Images_Lyon -it recup_images_cam
 ```
 Pour créer puis lancer le container respectivement.
 
@@ -116,11 +116,11 @@ Il va ensuite enregistrer les images en local ainsi que sur un csv qui nous serv
 Pour ce faire nous devons créer et exécuter le dockerfile :
 
 ```dockerfile
-docker build -t main -f Dockerfile_main .
+docker build --no-cache -t main -f Docker/Dockerfile_main ./Docker
 ```
 
 ```dockerfile
-docker run -v data:/app/detected_classes -it main
+docker run --rm -v .\Images_Lyon:/app/Images_Lyon -v .\Docker\predict_images:/app/predict_images -v .\Docker\detected_classes.csv:/app/detected_classes.csv -it main
 ```
 
 ## Dashboard Analysis
@@ -129,11 +129,11 @@ A l'aide de la librairie streamlit nous allons créer des graphiques pour affich
 
 Lancer la commande :
 ```dockerfile
-docker build -t dashboard -f Dockerfile_dashboard .
+docker build --no-cache -t dashboard -f Docker/Dockerfile_dashboard ./Docker
 ```
 Puis :
 ```dockerfile
-docker run -it dashboard
+docker run --rm -v .\Docker\predict_images:/app/predict_images -v .\Docker:/app -it dashboard
 ```
 Afin de créer et lancer le docker contenant notre dashboard.
 
