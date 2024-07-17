@@ -1,6 +1,0 @@
-numpy==1.26.4
-opencv-contrib-python==4.9.0.80
-requests==2.27.1
-pillow==10.3.0
-TIME-python==0.0.17
-imagehash==4.3.1
